@@ -69,6 +69,19 @@ export class AttendanceService {
         })
     }
 
+    async getAttendance(userId: string, date: string) {
+        const attendanceDate = new Date(date)
+        attendanceDate.setHours(0, 0, 0, 0)
+
+        const attendance = await this.prisma.attendance.findUnique({
+            where: {
+                userId_date: { userId, date: attendanceDate }
+            }
+        })
+        
+        return attendance;
+    }
+
     async getSummary(userId: string, startDate?: string, endDate?: string) {
         const now = new Date()
         const firstDay = new Date(now.getFullYear(), now.getMonth(), 1)

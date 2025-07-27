@@ -20,6 +20,12 @@ export class AttendanceController {
         return this.attendanceService.checkOut(userId, notes)
     }
 
+    @Get('today')
+    async getTodayAttendance(@Request() req) {
+        const userId = req.user.sub
+        return this.attendanceService.getAttendance(userId, new Date().toISOString())
+    }
+
     @Get('summary')
     async getSummary(
         @Request() req,
