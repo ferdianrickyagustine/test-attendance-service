@@ -101,4 +101,23 @@ export class AttendanceService {
             orderBy: { date: 'asc' }
         })
     }
+
+    async getAllAttendance(startDate?: string, endDate?: string) {
+    const now = new Date();
+    const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+    const lastDay = now;
+
+    const start = startDate ? new Date(startDate) : firstDay;
+    const end = endDate ? new Date(endDate) : lastDay;
+
+    return this.prisma.attendance.findMany({
+        where: {
+            date: {
+                gte: start,
+                lte: end
+            }
+        },
+        orderBy: { date: 'asc' }
+    });
+}
 }

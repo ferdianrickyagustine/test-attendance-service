@@ -6,7 +6,7 @@ import { CheckInDto } from './dto/attendance.dto';
 @Controller('attendance')
 @UseGuards(JwtAuthGuard)
 export class AttendanceController {
-    constructor(private readonly attendanceService: AttendanceService) {}
+    constructor(private readonly attendanceService: AttendanceService) { }
 
     @Post('check-in')
     async checkIn(@Request() req, @Body() checkInDto: CheckInDto) {
@@ -34,5 +34,10 @@ export class AttendanceController {
     ) {
         const userId = req.user.sub
         return this.attendanceService.getSummary(userId, startDate, endDate);
+    }
+
+    @Get('history')
+    async getHistory(@Query('startDate') startDate?: string, @Query('endDate') endDate?: string) {
+        return this.attendanceService.getAllAttendance(startDate, endDate);
     }
 }
