@@ -13,7 +13,7 @@ model Attendance {
     date        DateTime @default(now()) @db.Date
     checkIn     DateTime? 
     checkOut    DateTime?
-    status      String @default("PRESENT")
+    status      String @default("ABSENT")
     notes       String? @db.Text
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
