@@ -50,6 +50,7 @@ Jika melakukan check-in lagi
 {
   "notes": ""
 }
+```
 
 Jika melakukan check-out lagi
 ```json
